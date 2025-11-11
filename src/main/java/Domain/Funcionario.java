@@ -165,4 +165,20 @@ public class Funcionario {
     public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "id=" + id +
+                ", tipoIdentificacion=" + (tipoIdentificacion != null ? tipoIdentificacion.toString() : "null") +
+                ", identificacion='" + identificacion + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", estadoCivil=" + (estadoCivil != null ? estadoCivil.toString() : "null") +
+                ", sexo=" + (sexo != null ? sexo.toString() : "null") +
+                ", direccion='" + direccion + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", fechaNacimiento=" + (fechaNacimiento != null ? fechaNacimiento.toString() : "null") +
+                '}';
+    }
 }
