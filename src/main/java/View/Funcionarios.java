@@ -14,13 +14,13 @@ public class Funcionarios {
             } else {
                 for (Funcionario funcionario : funcionarios) {
                     String tipo = funcionario.getTipoIdentificacion() != null
-                            ? funcionario.getTipoIdentificacion().getValorBD()
+                            ? funcionario.getTipoIdentificacion().getDescripcion()
                             : "null";
                     String estado = funcionario.getEstadoCivil() != null
-                            ? funcionario.getEstadoCivil().getValorBD()
+                            ? funcionario.getEstadoCivil().getDescripcion()
                             : "null";
                     String sexo = funcionario.getSexo() != null
-                            ? funcionario.getSexo().getValorBD()
+                            ? funcionario.getSexo().getDescripcion()
                             : "null";
 
                     System.out.println("ID: " + funcionario.getId() +

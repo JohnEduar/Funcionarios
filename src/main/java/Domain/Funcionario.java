@@ -1,6 +1,6 @@
 package Domain;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Funcionario {
 
@@ -11,23 +11,28 @@ public class Funcionario {
         PASAPORTE("Pasaporte"),
         PPT("PPT");
 
-        private final String valorBD;
+        private final String descripcion;
 
-        TipoIdentificacion(String valorBD) {
-            this.valorBD = valorBD;
+        TipoIdentificacion(String descripcion) {
+            this.descripcion = descripcion;
         }
 
-        public String getValorBD() {
-            return valorBD;
+        public String getDescripcion() {
+            return descripcion;
         }
 
-        public static TipoIdentificacion fromValorBD(String valor) {
+        @Override
+        public String toString() {
+            return descripcion;
+        }
+
+        public static TipoIdentificacion fromDescripcion(String desc) {
             for (TipoIdentificacion tipo : values()) {
-                if (tipo.valorBD.equals(valor)) {
+                if (tipo.descripcion.equalsIgnoreCase(desc)) {
                     return tipo;
                 }
             }
-            throw new IllegalArgumentException("Tipo de identificación no válido: " + valor);
+            throw new IllegalArgumentException("Tipo de identificación no válido: " + desc);
         }
     }
 
@@ -36,48 +41,57 @@ public class Funcionario {
         CASADO("Casado"),
         VIUDO("Viudo");
 
-        private final String valorBD;
+        private final String descripcion;
 
-        EstadoCivil(String valorBD) {
-            this.valorBD = valorBD;
+        EstadoCivil(String descripcion) {
+            this.descripcion = descripcion;
         }
 
-        public String getValorBD() {
-            return valorBD;
+        public String getDescripcion() {
+            return descripcion;
         }
 
-        public static EstadoCivil fromValorBD(String valor) {
+        @Override
+        public String toString() {
+            return descripcion;
+        }
+
+        public static EstadoCivil fromDescripcion(String desc) {
             for (EstadoCivil estado : values()) {
-                if (estado.valorBD.equals(valor)) {
+                if (estado.descripcion.equalsIgnoreCase(desc)) {
                     return estado;
                 }
             }
-            throw new IllegalArgumentException("Estado civil no válido: " + valor);
+            throw new IllegalArgumentException("Estado civil no válido: " + desc);
         }
     }
 
     public enum Sexo {
         MASCULINO("Masculino"),
-        FEMENINO("Femenino"),
-        OTRO("Otro");
+        FEMENINO("Femenino");
 
-        private final String valorBD;
+        private final String descripcion;
 
-        Sexo(String valorBD) {
-            this.valorBD = valorBD;
+        Sexo(String descripcion) {
+            this.descripcion = descripcion;
         }
 
-        public String getValorBD() {
-            return valorBD;
+        public String getDescripcion() {
+            return descripcion;
         }
 
-        public static Sexo fromValorBD(String valor) {
-            for (Sexo s : values()) {
-                if (s.valorBD.equals(valor)) {
-                    return s;
+        @Override
+        public String toString() {
+            return descripcion;
+        }
+
+        public static Sexo fromDescripcion(String desc) {
+            for (Sexo sexo : values()) {
+                if (sexo.descripcion.equalsIgnoreCase(desc)) {
+                    return sexo;
                 }
             }
-            throw new IllegalArgumentException("Sexo no válido: " + valor);
+            throw new IllegalArgumentException("Sexo no válido: " + desc);
         }
     }
 
@@ -89,7 +103,7 @@ public class Funcionario {
     private Sexo sexo;
     private String direccion;
     private String telefono;
-    private LocalDateTime fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     // Constructores, getters y setters
 
@@ -159,10 +173,10 @@ public class Funcionario {
         this.telefono = telefono;
     }
 
-    public LocalDateTime getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
-    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

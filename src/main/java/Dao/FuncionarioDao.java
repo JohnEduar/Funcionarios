@@ -36,15 +36,15 @@ public class FuncionarioDao {
             while (resultSet.next()) {
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(resultSet.getInt("idFuncionario"));
-                funcionario.setTipoIdentificacion(Funcionario.TipoIdentificacion.fromValorBD(resultSet.getString("tipo_identificacion")));
+                funcionario.setTipoIdentificacion(Funcionario.TipoIdentificacion.fromDescripcion(resultSet.getString("tipo_identificacion")));
                 funcionario.setIdentificacion(resultSet.getString("identificacion"));
                 funcionario.setNombre(resultSet.getString("nombre"));
                 funcionario.setApellidos(resultSet.getString("apellidos"));
-                funcionario.setEstadoCivil(Funcionario.EstadoCivil.fromValorBD(resultSet.getString("estado_civil")));
-                funcionario.setSexo(Funcionario.Sexo.fromValorBD(resultSet.getString("sexo")));
+                funcionario.setEstadoCivil(Funcionario.EstadoCivil.fromDescripcion(resultSet.getString("estado_civil")));
+                funcionario.setSexo(Funcionario.Sexo.fromDescripcion(resultSet.getString("sexo")));
                 funcionario.setDireccion(resultSet.getString("direccion"));
                 funcionario.setTelefono(resultSet.getString("telefono"));
-                funcionario.setFechaNacimiento(resultSet.getTimestamp("fecha_nacimiento").toLocalDateTime());
+                funcionario.setFechaNacimiento(resultSet.getDate("fecha_nacimiento").toLocalDate());
                 funcionarios.add(funcionario);
             }
             return funcionarios;
