@@ -16,4 +16,20 @@ public class FuncionarioController {
     public List<Funcionario> getFuncionarios() throws SQLException {
         return funcionarioDao.getFuncionarios();
     }
+
+    public Funcionario getFuncionarioById(int id) throws SQLException {
+        return funcionarioDao.getFuncionarioById(id);
+    }
+
+    public void createFuncionario(Funcionario funcionario) throws SQLException {
+        funcionarioDao.createFuncionario(funcionario);
+    }
+
+    public void updateFuncionario(Funcionario funcionario) throws SQLException {
+        funcionarioDao.updateFuncionario(funcionario);
+    }
+
+    public void deleteFuncionario(int id) throws SQLException {
+        funcionarioDao.deleteFuncionario(id);
+    }
 }

@@ -218,6 +218,10 @@ public class FuncionarioGUI extends JFrame {
     private void agregarFuncionario() {
         try {
             Funcionario funcionario = obtenerFuncionarioDesdeFormulario();
+
+            FuncionarioDao dao = new FuncionarioDao();
+            dao.createFuncionario(funcionario); // Insertar en BD
+
             funcionarios.add(funcionario);
             agregarFilaTabla(funcionario);
             limpiarCampos();
@@ -225,6 +229,7 @@ public class FuncionarioGUI extends JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
 
@@ -237,6 +242,12 @@ public class FuncionarioGUI extends JFrame {
 
         try {
             Funcionario funcionario = obtenerFuncionarioDesdeFormulario();
+            Funcionario funcionarioOriginal = funcionarios.get(selectedRow);
+            funcionario.setId(funcionarioOriginal.getId()); // Usar el id del registro existente
+
+            FuncionarioDao dao = new FuncionarioDao();
+            dao.updateFuncionario(funcionario); // Actualizar en BD
+
             funcionarios.set(selectedRow, funcionario);
             actualizarFilaTabla(selectedRow, funcionario);
             limpiarCampos();
@@ -244,6 +255,7 @@ public class FuncionarioGUI extends JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
 
@@ -259,10 +271,21 @@ public class FuncionarioGUI extends JFrame {
                 "Confirmar", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            funcionarios.remove(selectedRow);
-            tableModel.removeRow(selectedRow);
-            limpiarCampos();
-            JOptionPane.showMessageDialog(this, "Funcionario eliminado exitosamente");
+            try {
+                Funcionario funcionario = funcionarios.get(selectedRow);
+
+                FuncionarioDao dao = new FuncionarioDao();
+                dao.deleteFuncionario(funcionario.getId()); // Eliminar de BD
+
+                funcionarios.remove(selectedRow);
+                tableModel.removeRow(selectedRow);
+                limpiarCampos();
+                JOptionPane.showMessageDialog(this, "Funcionario eliminado exitosamente");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
         }
     }
 
